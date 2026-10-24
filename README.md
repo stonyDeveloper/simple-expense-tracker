@@ -78,9 +78,48 @@ npm run test:bug
 
 In the starter project this test **is expected to fail**. You will use it in the debugging exercise. Once the issue is fixed, it should pass, and `npm test` should still pass too.
 
+## Spending Insights
+
+A **Spending Insights** section sits on the dashboard, below the summary
+cards and expense breakdown, and visualizes the same expense data the rest
+of the app uses — nothing hardcoded, nothing stored separately.
+
+![Spending Insights section, showing total spending, a category breakdown chart, and a weekly spending trend chart](docs/screenshots/spending-insights.jpg)
+
+- **Total spending** — a clear total for all recorded expenses (reuses the
+  same `calculateTotalExpenses` the Dashboard's "Total Expenses" card uses,
+  so the two always agree).
+- **Spending by category** — a horizontal bar chart of how much has been
+  spent in each category. Categories with no expenses are omitted.
+- **Spending trend (by week)** — a bar chart of total spending per
+  Monday-start week, oldest to newest, for every week that has at least
+  one expense. Weekly buckets were chosen over daily ones since they read
+  as an actual trend rather than a lot of near-empty days — see `SPEC.md`
+  for the full reasoning.
+- **Live updates** — adding or deleting an expense updates all of the
+  above immediately; nothing needs a page refresh.
+- **Empty state** — when there are no expenses at all, the section shows a
+  message instead of empty charts.
+
+Charts are built with plain SVG/CSS (no new runtime dependency); see
+`PLAN.md` for the full implementation plan, `SPEC.md` for requirements and
+acceptance criteria, and `TESTING.md` for the test commands and results.
+
+### Running it yourself
+
+```bash
+npm install
+npm run dev
+```
+
+Open the printed URL (usually <http://localhost:5173>) — Spending Insights
+appears automatically on the dashboard using the sample data, or your own
+expenses once you add some.
+
 ## Features
 
 - **Dashboard**: total allocated budget, total expenses, remaining balance, and a breakdown of spending by category.
+- **Spending Insights**: category breakdown chart, weekly spending trend chart, and a total spending figure — see [above](#spending-insights).
 - **Category budgets**: six categories, each with an allocated budget, the amount spent, and the remaining balance. Click **Edit** to change a category's budget. The remaining balance can go negative when you overspend.
 - **Add expenses**: enter a description, amount, category, and date. The form checks that every field is valid.
 - **View expenses**: all expenses are listed newest first. Use the **Sort** menu to show oldest first, or to group them by category.
@@ -124,19 +163,31 @@ If the page ever fails to load, you can also clear the data manually. Open your 
 │   │   ├── SummaryCard.jsx     # One summary statistic card
 │   │   ├── CategoryBudgets.jsx # Category table with budget editing
 │   │   ├── ExpenseForm.jsx     # Add-expense form with validation
-│   │   └── ExpenseList.jsx     # Expense table with sorting and delete
+│   │   ├── ExpenseList.jsx     # Expense table with sorting and delete
+│   │   └── SpendingInsights/   # Spending Insights section (see above)
+│   │       ├── index.jsx                  # Section container, total, empty state
+│   │       ├── CategoryBreakdownChart.jsx # FR1 — spending per category
+│   │       └── SpendingTrendChart.jsx     # FR2 — weekly spending trend
 │   ├── data/
 │   │   └── sampleData.js       # Default categories, sample expenses, storage keys
 │   ├── hooks/
 │   │   └── useLocalStorage.js  # useState that also saves to localStorage
 │   └── utils/
 │       ├── expenseCalculations.js # Totals, per-category spending, sorting
+│       ├── insightsCalculations.js # Category breakdown + weekly trend (pure)
 │       └── formatters.js       # Currency and date helpers
 ├── tests/
 │   ├── setup.js                # Test setup (jest-dom matchers, cleanup)
 │   ├── expenseCalculations.test.js
+│   ├── insightsCalculations.test.js
 │   ├── components.test.jsx
+│   ├── spendingInsights.test.jsx
 │   └── regression/             # Targeted regression test (npm run test:bug)
+├── docs/
+│   └── screenshots/             # Spending Insights screenshot(s)
+├── SPEC.md                     # Spending Insights requirements
+├── PLAN.md                     # Spending Insights implementation plan
+├── TESTING.md                  # Spending Insights test commands + results
 ├── vite.config.js              # Vite + Vitest configuration
 └── vitest.regression.config.js # Vitest config for the regression test
 ```

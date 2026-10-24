@@ -17,7 +17,7 @@ export function calculateTotalBudget(categories) {
 export function calculateTotalExpenses(expenses) {
   const uniqueExpenses = new Map();
   for (const expense of expenses) {
-    uniqueExpenses.set(expense.date, expense);
+    uniqueExpenses.set(expense.id, expense);
   }
 
   let total = 0;
