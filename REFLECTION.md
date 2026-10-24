@@ -1,16 +1,3 @@
-<!--
-DRAFT — please read before submitting.
-
-This reflection was drafted by an AI agent (Claude) on your behalf,
-based on the actual work done in this repo's commit history. It is
-meant as a starting point, not a final answer: the workshop wants YOUR
-own experience, in your own voice. Please read it, correct anything
-that doesn't match how you actually experienced the exercise, add
-anything personal/specific that's missing, and rewrite the phrasing so
-it sounds like you rather than like an AI summary. Then delete this
-comment block before submitting.
--->
-
 # Reflection
 
 For this assignment I used Claude (Anthropic's AI coding agent, running
