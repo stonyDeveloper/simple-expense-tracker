@@ -282,6 +282,128 @@ main.container {
   margin-right: 0;
 }
 
+/* ---------- Spending Insights ---------- */
+
+.insights-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.insights-total__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.insights-total__amount {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.insights-bars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Category breakdown: horizontal bars */
+
+.insights-bar-row {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.insights-bar-row__label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.insights-bar-row__track {
+  background: var(--color-primary-soft);
+  border-radius: var(--radius-small);
+  height: 14px;
+  overflow: hidden;
+}
+
+.insights-bar-row__fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-small);
+}
+
+.insights-bar-row__value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Spending trend: vertical bars */
+
+.insights-bars--vertical {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  height: 200px;
+  padding-top: 12px;
+}
+
+.insights-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  gap: 4px;
+}
+
+.insights-bar-col__track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  background: var(--color-teal-soft);
+  border-radius: var(--radius-small);
+  overflow: hidden;
+}
+
+.insights-bar-col__fill {
+  width: 100%;
+  min-height: 2px;
+  background: var(--color-teal);
+}
+
+.insights-bar-col__value {
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.insights-bar-col__label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
 /* ---------- Tables ---------- */
 
 .data-table {
@@ -544,6 +666,10 @@ select[aria-invalid='true'] {
 
   .breakdown-list {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
   }
 
   .expenses-layout {

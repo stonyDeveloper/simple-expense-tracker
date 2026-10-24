@@ -1,5 +1,6 @@
 import Header from './components/Header.jsx';
 import Dashboard from './components/Dashboard.jsx';
+import SpendingInsights from './components/SpendingInsights/index.jsx';
 import CategoryBudgets from './components/CategoryBudgets.jsx';
 import ExpenseForm from './components/ExpenseForm.jsx';
 import ExpenseList from './components/ExpenseList.jsx';
@@ -51,6 +52,8 @@ function App() {
 
       <main className="container">
         <Dashboard categories={categories} expenses={expenses} />
+
+        <SpendingInsights categories={categories} expenses={expenses} />
 
         <CategoryBudgets
           categories={categories}

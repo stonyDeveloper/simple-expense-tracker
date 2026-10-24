@@ -219,11 +219,13 @@ describe('App', () => {
         JSON.stringify([{ id: 'food', name: 'Food & Dining', icon: '🍽️', budget: 1 }])
       );
       render(<App />);
-      expect(screen.getByText(/No expenses yet/)).toBeInTheDocument();
+      // Both the expense list and the Spending Insights section show an
+      // empty-state message when there are no expenses.
+      expect(screen.getAllByText(/No expenses yet/).length).toBeGreaterThan(0);
 
       await user.click(screen.getByRole('button', { name: /reset demo data/i }));
 
-      expect(screen.queryByText(/No expenses yet/)).not.toBeInTheDocument();
+      expect(screen.queryAllByText(/No expenses yet/)).toHaveLength(0);
       expect(readStorage(STORAGE_KEYS.expenses)).toEqual(createSampleExpenses());
       expect(readStorage(STORAGE_KEYS.categories)).toHaveLength(6);
       expect(screen.getByText('₦270,000.00')).toBeInTheDocument();
